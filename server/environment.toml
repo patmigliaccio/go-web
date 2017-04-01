@@ -12,4 +12,4 @@ route = "/assets"
 location = "../public/assets"
 
 [web.api]
-root = "/api"
+root = "/api/v0"

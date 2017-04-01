@@ -1,12 +1,10 @@
 package api
 
 import (
-	"encoding/json"
-	"log"
 	"net/http"
 	"strconv"
 
-	"github.com/julienschmidt/httprouter"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 // Document : data model for a document object
@@ -18,8 +16,8 @@ type Document struct {
 }
 
 // DocumentHandler : returns a document based on an id it is given
-func DocumentHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	id, _ := strconv.Atoi(ps.ByName("id"))
+func DocumentHandler(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
 
 	document := Document{
 		id,
@@ -27,11 +25,5 @@ func DocumentHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Param
 		"GET",
 	}
 
-	log.Println(document)
-
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(document); err != nil {
-		log.Fatal(err)
-	}
+	c.JSON(http.StatusOK, document)
 }

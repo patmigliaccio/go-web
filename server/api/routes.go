@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/julienschmidt/httprouter"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 // Route : a type of object for defining route settings
@@ -9,14 +9,14 @@ type Route struct {
 	Name   string
 	Method string
 	Path   string
-	Handle httprouter.Handle
+	Handle gin.HandlerFunc
 }
 
 // Routes : an array of Route settings
 type Routes []Route
 
 // AddRoutes : a function to bind the routes to the router
-func AddRoutes(root string, r *httprouter.Router) {
+func AddRoutes(root string, r *gin.Engine) {
 	for _, route := range routes {
 		r.Handle(route.Method, root+route.Path, route.Handle)
 	}

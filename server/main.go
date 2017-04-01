@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/julienschmidt/httprouter"
 	"github.com/patmigliaccio/go-web/server/api"
 	"github.com/spf13/viper"
+	"gopkg.in/gin-gonic/gin.v1"
 ) // TODO: Move local mports to common cmd directory
 
 // LoadConfig : reads in 'environment.toml' to Viper config
@@ -23,37 +23,28 @@ func LoadConfig() {
 }
 
 // LoadAPI : configures api service
-func LoadAPI(r *httprouter.Router) {
+func LoadAPI(r *gin.Engine) {
 	apiRoot := viper.GetString("web.api.root")
 	api.AddRoutes(apiRoot, r)
 }
 
 // LoadAssets : adds asset folder configuration
-func LoadAssets(r *httprouter.Router) {
+func LoadAssets(r *gin.Engine) {
 	assets := viper.GetStringMapString("web.assets")
-	route, location := assets["route"]+"/*filepath", assets["location"]
-	r.ServeFiles(route, http.Dir(location))
-}
-
-// Index : serves the initial app
-func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	fs := http.FileServer(http.Dir("../public"))
-	fs.ServeHTTP(w, r)
+	route, location := assets["route"], assets["location"]
+	r.StaticFS(route, http.Dir(location))
 }
 
 func main() {
 	LoadConfig()
 
-	r := httprouter.New()
-	r.GET("/", Index)
+	r := gin.Default()
+	r.StaticFile("/", "../public")
 
 	LoadAPI(r)
 	LoadAssets(r)
 
 	port := ":" + strconv.Itoa(viper.GetInt("server.port"))
 
-	err := http.ListenAndServe(port, r)
-	if err != nil {
-		panic(fmt.Errorf("server error: %s", err))
-	}
+	r.Run(port)
 }
