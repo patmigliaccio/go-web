@@ -1,6 +1,6 @@
 # Go Web Application
 
-An application built from the ground up in the [Go programming language](golang). A work in progress that will eventually become a full featured web app.
+An application built from the ground up in the [Go](https://golang.org/) programming language using microservices and a [Redis](https://redis.io/) data store. A work in progress that will eventually become a full featured web app.
 
 ## Starting Web App
 

@@ -6,10 +6,12 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/patmigliaccio/go-web/server/api"
+	"github.com/patmigliaccio/go-web/server/rest"
+	"github.com/patmigliaccio/go-web/service"
+	"github.com/patmigliaccio/go-web/service/document"
 	"github.com/spf13/viper"
 	"gopkg.in/gin-gonic/gin.v1"
-) // TODO: Move local mports to common cmd directory
+)
 
 // LoadConfig : reads in 'environment.toml' to Viper config
 func LoadConfig() {
@@ -22,10 +24,10 @@ func LoadConfig() {
 	}
 }
 
-// LoadAPI : configures api service
-func LoadAPI(r *gin.Engine) {
-	apiRoot := viper.GetString("web.api.root")
-	api.AddRoutes(apiRoot, r)
+// LoadRESTAPI : configures api service
+func LoadRESTAPI(r *gin.Engine) {
+	apiRoot := viper.GetString("web.rest.root")
+	rest.AddRoutes(apiRoot, r)
 }
 
 // LoadAssets : adds asset folder configuration
@@ -35,14 +37,32 @@ func LoadAssets(r *gin.Engine) {
 	r.StaticFS(route, http.Dir(location))
 }
 
+// StartServices : runs all services
+func StartServices() {
+	var redisCfg service.Config
+
+	err := viper.UnmarshalKey("redis", &redisCfg)
+	if err != nil {
+		panic(fmt.Errorf("error mapping Redis config: %s", err))
+	}
+
+	dsvc := document.DocumentService{}
+	if err := dsvc.Run(redisCfg); err != nil {
+		panic(fmt.Errorf("error starting Document Service: %s", err))
+	}
+}
+
 func main() {
 	LoadConfig()
 
-	r := gin.Default()
-	r.StaticFile("/", "../public")
+	r := gin.New()
 
-	LoadAPI(r)
+	public := viper.GetString("web.location")
+	r.StaticFile("/", public)
+
+	LoadRESTAPI(r)
 	LoadAssets(r)
+	StartServices()
 
 	port := ":" + strconv.Itoa(viper.GetInt("server.port"))
 

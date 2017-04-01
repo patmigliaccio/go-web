@@ -7,9 +7,19 @@ author = "Pat Migliaccio <pat@patmigliaccio.com> (https://patmigliaccio.com/)"
 [server]
 port = 8080
 
+[web]
+location = "../public"
+
 [web.assets]
 route = "/assets"
 location = "../public/assets"
 
-[web.api]
+[web.rest]
 root = "/api/v0"
+
+[redis]
+SvcPort = 4040
+DbHost = "localhost"
+DbPort = 6379
+DbPassword = ""
+Db = 0

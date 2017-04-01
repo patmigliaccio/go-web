@@ -1,4 +1,4 @@
-package api
+package rest
 
 import (
 	"gopkg.in/gin-gonic/gin.v1"
@@ -27,6 +27,6 @@ var routes = Routes{
 		"Document",
 		"GET",
 		"/document/:id",
-		DocumentHandler,
+		GetDocument,
 	},
 }
