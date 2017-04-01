@@ -1,0 +1,10 @@
+a {
+	font-size: 1em;
+	font-weight: 600;
+	color: #0072c6;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #999;
+}
