@@ -4,10 +4,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// ROOT : sets the default root path for api calls
-// TODO: Move to environment config file
-const ROOT string = "/api"
-
 // Route : a type of object for defining route settings
 type Route struct {
 	Name   string
@@ -20,9 +16,9 @@ type Route struct {
 type Routes []Route
 
 // AddRoutes : a function to bind the routes to the router
-func AddRoutes(r *httprouter.Router) {
+func AddRoutes(root string, r *httprouter.Router) {
 	for _, route := range routes {
-		r.Handle(route.Method, ROOT+route.Path, route.Handle)
+		r.Handle(route.Method, root+route.Path, route.Handle)
 	}
 }
 

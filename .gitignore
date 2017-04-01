@@ -1,3 +1,7 @@
 server/server
 
+*.exe
+*.test
+*.bench
+
 .vscode
