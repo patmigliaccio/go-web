@@ -9,11 +9,11 @@ host = "localhost"
 port = 8080
 
 [web]
-location = "../public"
+location = "../client/dist"
 
 [web.assets]
-route = "/assets"
-location = "../public/assets"
+route = "/static"
+location = "../client/dist/static"
 
 [web.rest]
 root = "/api/v0"

@@ -1,0 +1,19 @@
+; http://editorconfig.org/
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+indent_style = tab
+indent_size = 4
+
+; Go
+[*.go]
+indent_style = tab
+indent_size = 4
+
+; TOML
+[*.toml]
+indent_style = tab
+indent_size = 2
