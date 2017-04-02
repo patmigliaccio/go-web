@@ -1,12 +1,22 @@
 # Go Web Application
 
-An application built from the ground up in the [Go](https://golang.org/) programming language using microservices and a [Redis](https://redis.io/) data store. A work in progress that will eventually become a full featured web app.
+An application built from the ground up in the [Go](https://golang.org/) programming language using microservices, a [Redis](https://redis.io/) data store, and a [Vue.js](https://vuejs.org/) front-end. A work in progress that will eventually become a full featured web app.
 
-## Starting Web App
+## Building and Starting
 
-Navigate to the `app` directory and run the following:
+Navigate to the `client` directory and run the following:
+
+``` bash
+$ npm run build
 ```
+
+Then navigate to the `server` directory and run the following:
+
+``` bash
 $ go build
-$ ./app
+$ ./server
 ```
-Then navigate to `localhost:8080` in a web browser. `Ctrl+C` to terminate the server.
+
+Finally open `localhost:8080` in a web browser. 
+
+`Ctrl+C` to terminate the server.

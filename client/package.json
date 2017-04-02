@@ -1,14 +1,14 @@
 {
   "name": "go-web",
-  "version": "0.0.1",
-  "description": "a web application using Go",
+  "version": "0.0.2",
+  "description": "a web application using Go, Redis, and Vue.js",
   "author": "Pat Migliaccio <pat@patmigliaccio.com> (https://patmigliaccio.com)",
   "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/patmigliaccio/go-web.git"
   },
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/patmigliaccio/go-web/issues"
   },
