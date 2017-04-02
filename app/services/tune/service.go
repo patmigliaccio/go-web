@@ -1,4 +1,4 @@
-package document
+package tune
 
 import (
 	"fmt"
@@ -9,12 +9,13 @@ import (
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
-// DocumentService : instance of the Document Service
-type DocumentService struct {
+// TuneService : instance of the Tune Service
+type TuneService struct {
+	Host string
 }
 
 // getDB : returns a client instance of a Redis Server
-func (ds *DocumentService) getDB(cfg services.Config) (*redis.Client, error) {
+func (ts *TuneService) getDB(cfg services.Config) (*redis.Client, error) {
 	addr := cfg.DbHost + ":" + strconv.Itoa(cfg.DbPort)
 
 	client := redis.NewClient(&redis.Options{
@@ -31,22 +32,23 @@ func (ds *DocumentService) getDB(cfg services.Config) (*redis.Client, error) {
 	return client, err
 }
 
-// Run : starts the DocumentService
-func (ds *DocumentService) Run(cfg services.Config) error {
-	db, err := ds.getDB(cfg)
+// Run : starts the TuneService
+func (ts *TuneService) Run(cfg services.Config) error {
+	db, err := ts.getDB(cfg)
 	if err != nil {
 		return err
 	}
 
-	dr := &Resource{Db: db}
+	tr := &Resource{Db: db}
 
 	r := gin.New()
 
-	r.GET("/document/:id", dr.GetDocument)
+	r.GET("/tune/:id", tr.GetTune)
+	r.POST("/tune", tr.AddTune)
 
-	port := ":" + strconv.Itoa(cfg.SvcPort)
+	ts.Host = cfg.SvcHost + ":" + strconv.Itoa(cfg.SvcPort)
 
-	go r.Run(port)
+	go r.Run(ts.Host)
 
 	return nil
 }

@@ -17,9 +17,9 @@ func AddRoutes(root string, r *gin.Engine) {
 
 var routes = Routes{
 	models.Route{
-		"Document",
+		"Tune",
 		"GET",
-		"/document/:id",
-		GetDocument,
+		"/tune/:id",
+		GetTune,
 	},
 }

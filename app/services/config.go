@@ -2,9 +2,11 @@ package services
 
 // Config : options for Redis Server
 type Config struct {
-	SvcPort    int
-	DbHost     string
-	DbPort     int
-	DbPassword string
-	Db         int
+	SvcHost     string
+	SvcPort     int
+	SvcProtocol string
+	DbHost      string
+	DbPort      int
+	DbPassword  string
+	Db          int
 }

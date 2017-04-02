@@ -5,6 +5,7 @@ author = "Pat Migliaccio <pat@patmigliaccio.com> (https://patmigliaccio.com/)"
 # Environment Variables
 
 [server]
+host = "localhost"
 port = 8080
 
 [web]
@@ -18,7 +19,9 @@ location = "../public/assets"
 root = "/api/v0"
 
 [redis]
+SvcHost = "localhost"
 SvcPort = 4040
+SvcProtocol = "http" # https
 DbHost = "localhost"
 DbPort = 6379
 DbPassword = ""

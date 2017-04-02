@@ -7,7 +7,7 @@ import (
 
 	"github.com/patmigliaccio/go-web/app/rest"
 	"github.com/patmigliaccio/go-web/app/services"
-	"github.com/patmigliaccio/go-web/app/services/document"
+	"github.com/patmigliaccio/go-web/app/services/tune"
 	"github.com/spf13/viper"
 	"gopkg.in/gin-gonic/gin.v1"
 )
@@ -45,9 +45,9 @@ func StartServices() {
 		panic(fmt.Errorf("error mapping Redis config: %s", err))
 	}
 
-	dsvc := document.DocumentService{}
-	if err := dsvc.Run(redisCfg); err != nil {
-		panic(fmt.Errorf("error starting Document Service: %s", err))
+	tsvc := tune.TuneService{}
+	if err := tsvc.Run(redisCfg); err != nil {
+		panic(fmt.Errorf("error starting Tune Service: %s", err))
 	}
 }
 
@@ -63,7 +63,9 @@ func main() {
 	LoadAssets(r)
 	StartServices()
 
-	port := ":" + strconv.Itoa(viper.GetInt("server.port"))
+	addr := viper.GetString("server.host") + ":" + strconv.Itoa(viper.GetInt("server.port"))
 
-	r.Run(port)
+	if err := r.Run(addr); err != nil {
+		panic(fmt.Errorf("error starting app: %s", err))
+	}
 }

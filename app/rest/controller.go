@@ -1,37 +1,32 @@
 package rest
 
 import (
-	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 
-	"github.com/patmigliaccio/go-web/app/models"
+	"github.com/spf13/viper"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
-// GetDocument : returns a document based on an id it is given
-func GetDocument(c *gin.Context) {
+// GetTune : returns a Tune based on an id it is given
+func GetTune(c *gin.Context) {
 	id := c.Param("id")
 
-	var document models.Document
+	//TODO: Assign the service address elsewhere, not in controller
+	addr := viper.GetString("redis.SvcProtocol") + "://" + viper.GetString("redis.SvcHost") + ":" + strconv.Itoa(viper.GetInt("redis.SvcPort"))
 
-	//TODO: Make microservice url dynamic
-	resp, err := http.Get("http://localhost:4040/document/" + id)
+	resp, err := http.Get(addr + "/tune/" + id)
 	if err != nil {
-		log.Println(fmt.Errorf("error on GetDocument: %s", err))
+		log.Println(fmt.Errorf("error on GetTune: %s", err))
 		c.JSON(http.StatusBadRequest, err)
 	}
 
 	defer resp.Body.Close()
 
-	//TODO: Move unmarshalling into service
-	err = json.NewDecoder(resp.Body).Decode(&document)
-	if err != nil {
-		log.Println(fmt.Errorf("error unmarshalling GetDocument json: %s", err))
-		c.JSON(http.StatusBadRequest, err)
-		return
-	}
+	body, _ := ioutil.ReadAll(resp.Body)
 
-	c.JSON(http.StatusOK, document)
+	c.JSON(http.StatusOK, string(body))
 }
