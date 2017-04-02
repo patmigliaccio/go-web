@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/go-redis/redis"
-	"github.com/patmigliaccio/go-web/app/services"
+	"github.com/patmigliaccio/go-web/server/services"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 

@@ -1,7 +1,7 @@
 package rest
 
 import (
-	"github.com/patmigliaccio/go-web/app/models"
+	"github.com/patmigliaccio/go-web/server/models"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 

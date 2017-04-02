@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/patmigliaccio/go-web/app/rest"
-	"github.com/patmigliaccio/go-web/app/services"
-	"github.com/patmigliaccio/go-web/app/services/tune"
+	"github.com/patmigliaccio/go-web/server/rest"
+	"github.com/patmigliaccio/go-web/server/services"
+	"github.com/patmigliaccio/go-web/server/services/tune"
 	"github.com/spf13/viper"
 	"gopkg.in/gin-gonic/gin.v1"
 )

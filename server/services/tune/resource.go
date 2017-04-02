@@ -7,7 +7,7 @@ import (
 	"github.com/fatih/structs"
 	"github.com/go-redis/redis"
 	"github.com/google/uuid"
-	"github.com/patmigliaccio/go-web/app/models"
+	"github.com/patmigliaccio/go-web/server/models"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
