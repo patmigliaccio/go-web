@@ -1,19 +1,12 @@
 package rest
 
 import (
+	"github.com/patmigliaccio/go-web/app/models"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
-// Route : a type of object for defining route settings
-type Route struct {
-	Name   string
-	Method string
-	Path   string
-	Handle gin.HandlerFunc
-}
-
 // Routes : an array of Route settings
-type Routes []Route
+type Routes []models.Route
 
 // AddRoutes : a function to bind the routes to the router
 func AddRoutes(root string, r *gin.Engine) {
@@ -23,7 +16,7 @@ func AddRoutes(root string, r *gin.Engine) {
 }
 
 var routes = Routes{
-	Route{
+	models.Route{
 		"Document",
 		"GET",
 		"/document/:id",

@@ -1,4 +1,4 @@
-package service
+package services
 
 // Config : options for Redis Server
 type Config struct {

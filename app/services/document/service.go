@@ -5,15 +5,16 @@ import (
 	"strconv"
 
 	"github.com/go-redis/redis"
-	"github.com/patmigliaccio/go-web/service"
+	"github.com/patmigliaccio/go-web/app/services"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
+// DocumentService : instance of the Document Service
 type DocumentService struct {
 }
 
 // getDB : returns a client instance of a Redis Server
-func (ds *DocumentService) getDB(cfg service.Config) (*redis.Client, error) {
+func (ds *DocumentService) getDB(cfg services.Config) (*redis.Client, error) {
 	addr := cfg.DbHost + ":" + strconv.Itoa(cfg.DbPort)
 
 	client := redis.NewClient(&redis.Options{
@@ -31,7 +32,7 @@ func (ds *DocumentService) getDB(cfg service.Config) (*redis.Client, error) {
 }
 
 // Run : starts the DocumentService
-func (ds *DocumentService) Run(cfg service.Config) error {
+func (ds *DocumentService) Run(cfg services.Config) error {
 	db, err := ds.getDB(cfg)
 	if err != nil {
 		return err

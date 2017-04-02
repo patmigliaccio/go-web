@@ -1,4 +1,4 @@
-server/server
+app/app
 
 *.exe
 *.test

@@ -1,14 +1,13 @@
 package main
 
 import (
-	"net/http"
-
 	"fmt"
+	"net/http"
 	"strconv"
 
-	"github.com/patmigliaccio/go-web/server/rest"
-	"github.com/patmigliaccio/go-web/service"
-	"github.com/patmigliaccio/go-web/service/document"
+	"github.com/patmigliaccio/go-web/app/rest"
+	"github.com/patmigliaccio/go-web/app/services"
+	"github.com/patmigliaccio/go-web/app/services/document"
 	"github.com/spf13/viper"
 	"gopkg.in/gin-gonic/gin.v1"
 )
@@ -39,7 +38,7 @@ func LoadAssets(r *gin.Engine) {
 
 // StartServices : runs all services
 func StartServices() {
-	var redisCfg service.Config
+	var redisCfg services.Config
 
 	err := viper.UnmarshalKey("redis", &redisCfg)
 	if err != nil {

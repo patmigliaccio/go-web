@@ -4,9 +4,9 @@ An application built from the ground up in the [Go](https://golang.org/) program
 
 ## Starting Web App
 
-Navigate to the `server` directory and run the following:
+Navigate to the `app` directory and run the following:
 ```
 $ go build
-$ ./server
+$ ./app
 ```
 Then navigate to `localhost:8080` in a web browser. `Ctrl+C` to terminate the server.

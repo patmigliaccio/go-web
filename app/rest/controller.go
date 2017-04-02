@@ -1,28 +1,20 @@
 package rest
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 
-	"encoding/json"
-
+	"github.com/patmigliaccio/go-web/app/models"
 	"gopkg.in/gin-gonic/gin.v1"
 )
-
-// Document : data model for a document object
-// TODO: Move to models directory
-type Document struct {
-	ID         string `json:"id"`
-	RecordType string `json:"record_type"`
-	Value      string `json:"value"`
-}
 
 // GetDocument : returns a document based on an id it is given
 func GetDocument(c *gin.Context) {
 	id := c.Param("id")
 
-	var document Document
+	var document models.Document
 
 	//TODO: Make microservice url dynamic
 	resp, err := http.Get("http://localhost:4040/document/" + id)
