@@ -1,7 +1,3 @@
-[app]
-title = "Go Web Application by Pat Migliaccio"
-author = "Pat Migliaccio <pat@patmigliaccio.com> (https://patmigliaccio.com/)"
-
 # Environment Variables
 
 [server]
