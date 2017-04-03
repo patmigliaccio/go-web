@@ -16,7 +16,7 @@ export default {
 	name: 'home',
 	data: function () {
 		return {
-			defaultId: '840f77d0-4f12-49c7-a803-551641bcda5d',
+			defaultId: '6a6cd781-eb18-4413-88a2-31db43da225a',
 			id: '',
 			tune: {}
 		}
